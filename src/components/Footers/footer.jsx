@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import appleLogo from '../../assets/iconapple.png';
+import appleLogo from '../../assets/iconapple.webp';
 
 const Footer = () => {
   const footerLinks = [

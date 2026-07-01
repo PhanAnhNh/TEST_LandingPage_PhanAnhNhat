@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/technical.css';
-import ipads from '../assets/ipad1.png';
-import ipad from '../assets/ipad2.png';
+import ipads from '../assets/ipad1.webp';
+import ipad from '../assets/ipad.webp';
 
 const TechSpecs = () => {
   const specs = [
