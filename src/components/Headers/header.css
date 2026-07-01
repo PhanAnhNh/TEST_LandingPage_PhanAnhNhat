@@ -1,0 +1,52 @@
+.apple-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #d2d2d7;
+  z-index: 999;
+}
+
+.header-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 22px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-apple {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.product-title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.header-nav ul {
+  display: flex;
+  gap: 24px;
+}
+
+.header-nav a {
+  font-size: 12px;
+  color: var(--apple-dark);
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.header-nav a:hover {
+  opacity: 1;
+  color: var(--apple-blue);
+}

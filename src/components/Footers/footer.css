@@ -1,0 +1,48 @@
+.apple-footer {
+  background-color: #ffffff;
+  padding: 40px 22px;
+  font-size: 12px;
+  color: var(--apple-gray);
+  border-top: 1px solid #d2d2d7;
+}
+
+.footer-container {
+  max-width: 1024px;
+  display: flex;
+  gap: 50px;
+  margin-left: 110px;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 70px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #d2d2d7;
+}
+
+.footer-column h3 {
+  color: var(--apple-dark);
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul a:hover {
+  text-decoration: underline;
+  color: var(--apple-dark);
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  
+}
+
+.footer-bottom img{
+  width: 100px;
+  height: 100px;
+}

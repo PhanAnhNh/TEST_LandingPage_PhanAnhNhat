@@ -1,0 +1,255 @@
+.features-section {
+  padding: 100px 22px;
+  background-color: #ffffff;
+  margin-top: -50px;
+}
+
+.features-container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.features-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  color: #0071e3;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.features-header h2 {
+  font-size: 40px;
+  line-height: 1.1;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.explore-link {
+  color: #0071e3;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.explore-link:hover {
+  color: #005bb5;
+  text-decoration: underline;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background-color: #f5f5f7;
+  border-radius: 18px;
+  padding: 30px 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================== */
+/* TẤT CẢ ICON ĐỀU ĐƯỢC BO TRÒN VỚI NỀN TÍM */
+/* ========================================== */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+  border-radius: 50%; /* Bo tròn hoàn toàn */
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+  flex-shrink: 0;
+}
+
+/* Hiệu ứng hover cho tất cả icon */
+.card-icon:hover {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+}
+
+/* ========================================== */
+/* CÁC BIẾN THỂ MÀU SẮC KHÁC NHAU CHO TỪNG ICON */
+/* ========================================== */
+
+/* Icon 1: 🔮 - Màu tím đậm */
+.feature-card:nth-child(1) .card-icon {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+}
+
+.feature-card:nth-child(1) .card-icon:hover {
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+}
+
+/* Icon 2: 💻 - Màu xanh dương */
+.feature-card:nth-child(2) .card-icon {
+  background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+}
+
+.feature-card:nth-child(2) .card-icon:hover {
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+/* Icon 3: ✏️ - Màu tím hồng (giữ nguyên như cũ) */
+.feature-card:nth-child(3) .card-icon {
+  background: linear-gradient(135deg, #B660EF, #8B3FBF);
+  box-shadow: 0 4px 15px rgba(182, 96, 239, 0.4);
+}
+
+.feature-card:nth-child(3) .card-icon:hover {
+  box-shadow: 0 8px 25px rgba(182, 96, 239, 0.55);
+}
+
+/* Icon 4: 🔋 - Màu xanh lá */
+.feature-card:nth-child(4) .card-icon {
+  background: linear-gradient(135deg, #10B981, #047857);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.feature-card:nth-child(4) .card-icon:hover {
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+}
+
+/* ========================================== */
+/* HOẶC NẾU MUỐN TẤT CẢ ĐỀU CÙNG MÀU TÍM */
+/* ========================================== */
+/*
+.card-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+  border-radius: 50%;
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+}
+
+.card-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+}
+*/
+
+/* ========================================== */
+/* STYLE CHO TIÊU ĐỀ VÀ MÔ TẢ */
+/* ========================================== */
+
+.feature-card h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1d1d1f;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #86868b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========================================== */
+/* RESPONSIVE */
+/* ========================================== */
+
+@media screen and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .features-header h2 {
+    font-size: 34px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .features-section {
+    padding: 60px 18px;
+    margin-top: 0;
+  }
+
+  .features-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .features-header h2 {
+    font-size: 28px;
+  }
+
+  .explore-link {
+    font-size: 13px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .feature-card {
+    padding: 24px 18px;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .feature-card h3 {
+    font-size: 17px;
+  }
+
+  .feature-card p {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .features-header h2 {
+    font-size: 24px;
+  }
+
+  .feature-card {
+    padding: 20px 16px;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+}
