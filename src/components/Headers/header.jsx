@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './header.css';
-import { CartModal, FavoritesModal } from '../Modals/UserModals'; // Import 2 giao diện mới
+import { CartModal, FavoritesModal } from '../Modals/UserModals'; 
 
 
 const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);           // Quản lý mở Giỏ hàng
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false); // Quản lý mở Yêu thích
+  const [isCartOpen, setIsCartOpen] = useState(false);          
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false); 
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
                   
                   {isDropdownOpen && (
                     <div className="user-dropdown">
-                      {/* Hành động khi click mở sản phẩm yêu thích */}
+                     
                       <button className="dropdown-item" onClick={() => { setIsFavoritesOpen(true); setIsDropdownOpen(false); }}>
                         Sản phẩm yêu thích
                       </button>
@@ -86,8 +86,6 @@ const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
           </div>
         </div>
       </header>
-
-      {/* Render hai Modal ẩn dưới DOM */}
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <FavoritesModal isOpen={isFavoritesOpen} onClose={() => setIsFavoritesOpen(false)} />
     </>
