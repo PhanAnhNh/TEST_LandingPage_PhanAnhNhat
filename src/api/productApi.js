@@ -21,7 +21,7 @@ export const cartService = {
 
 export const favoriteService = {
   getFavorites: async () => {
-    const response = await axiosClient.get('/favorites');
+    const response = await axiosClient.get('/favorites/');
     return response.data; 
   },
 
