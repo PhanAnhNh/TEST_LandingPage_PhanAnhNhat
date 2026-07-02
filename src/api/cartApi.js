@@ -2,7 +2,7 @@ import axiosClient from '../api/api';
 
 export const cartService = {
   getCart: async () => {
-    const response = await axiosClient.get('/cart');
+    const response = await axiosClient.get('/cart/');
     return response.data;
   },
   updateCartItem: async (productId, quantity) => {
@@ -17,7 +17,7 @@ export const cartService = {
 
 export const favoriteService = {
   getFavorites: async () => {
-    const response = await axiosClient.get('/favorites');
+    const response = await axiosClient.get('/favorites/');
     return response.data;
   },
   removeFavorite: async (productId) => {
