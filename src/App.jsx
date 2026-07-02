@@ -5,6 +5,8 @@ import Header from './components/Headers/header'
 // Lazy load components
 const Banner = lazy(() => import('./page/banner'))
 const Features = lazy(() => import('./page/feature'))
+const ScrollytellingSection = lazy(() => import('./components/Scrollytelling/ScrollytellingSection'))
+const SectionDivider = lazy(() => import('./components/Scrollytelling/SectionDivider'))
 const TechSpecs = lazy(() => import('./page/technical'))
 const Accessories = lazy(() => import('./page/accessories'))
 const Footer = lazy(() => import('./components/Footers/footer'))
@@ -13,10 +15,8 @@ const AuthModal = lazy(() => import('./components/Auth/AuthModal'))
 function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // 👇 Thêm state để trigger refresh cho Accessories
   const [authTrigger, setAuthTrigger] = useState(0);
 
-  // Kiểm tra token khi component mount
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token) {
@@ -24,22 +24,18 @@ function App() {
     }
   }, []);
 
-  // 👇 Lắng nghe sự kiện đăng nhập/đăng xuất từ các tab khác
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === 'access_token') {
         const token = localStorage.getItem('access_token');
         setIsLoggedIn(!!token);
-        // Trigger refresh cho Accessories
         setAuthTrigger(prev => prev + 1);
       }
     };
 
-    // Lắng nghe sự kiện custom authChange
     const handleAuthChange = () => {
       const token = localStorage.getItem('access_token');
       setIsLoggedIn(!!token);
-      // Trigger refresh cho Accessories
       setAuthTrigger(prev => prev + 1);
     };
 
@@ -55,7 +51,6 @@ function App() {
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
     setIsAuthOpen(false);
-    // Trigger refresh cho Accessories
     setAuthTrigger(prev => prev + 1);
   };
 
@@ -67,10 +62,8 @@ function App() {
     setIsAuthOpen(false);
   };
 
-  // 👇 Hàm xử lý logout từ Header
   const handleLogout = useCallback(() => {
     setIsLoggedIn(false);
-    // Trigger refresh cho Accessories
     setAuthTrigger(prev => prev + 1);
   }, []);
 
@@ -80,16 +73,33 @@ function App() {
         onLoginClick={handleLoginClick}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
-        onLogout={handleLogout} // 👈 Truyền callback logout xuống Header
-        authTrigger={authTrigger} // 👈 Truyền trigger để Header biết
+        onLogout={handleLogout}
+        authTrigger={authTrigger}
       />
 
       <main>
         <Suspense fallback={<div style={{textAlign: 'center', padding: '50px'}}>Loading...</div>}>
           <Banner />
+          
+          {/* Section Divider - Có màu nền */}
+          <SectionDivider 
+            title="Trải nghiệm đỉnh cao"
+            subtitle="Mọi chi tiết đều được tối ưu để mang lại trải nghiệm tốt nhất cho bạn"
+            bgColor="#EAEAF2"  
+            textColor="#1d1d1f" 
+          />
+          
+          <ScrollytellingSection />
+          
+          <SectionDivider 
+            title="Sức mạnh trong tầm tay"
+            subtitle="iPad Air M2 - Thiết bị mỏng nhẹ nhất với hiệu năng mạnh mẽ nhất"
+            bgColor="#EAEAF2"    
+            textColor="#1d1d1f"
+          />
+          
           <Features />
           <TechSpecs />
-          {/* 👇 Truyền authTrigger vào Accessories để refresh */}
           <Accessories key={authTrigger} authTrigger={authTrigger} />
         </Suspense>
       </main>
