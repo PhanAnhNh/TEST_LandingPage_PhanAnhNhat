@@ -181,9 +181,78 @@
   font-size: 14px;
 }
 
-/* ======================== */
-/* RESPONSIVE */
-/* ======================== */
+[data-theme="dark"] .side-modal-content {
+  background-color: rgba(28, 28, 30, 0.98);
+}
+
+[data-theme="dark"] .side-modal-header {
+  border-bottom-color: #3a3a3c;
+}
+
+[data-theme="dark"] .side-modal-header h2 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .close-btn {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .close-btn:hover {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .modal-item-card {
+  border-bottom-color: #3a3a3c;
+}
+
+[data-theme="dark"] .item-info h4 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .item-price {
+  color: #0a84ff;
+}
+
+[data-theme="dark"] .item-category {
+  background: #3a3a3c;
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .quantity-control {
+  border-color: #3a3a3c;
+}
+
+[data-theme="dark"] .quantity-control button {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .remove-btn {
+  color: #ff453a;
+}
+
+[data-theme="dark"] .side-modal-footer {
+  border-top-color: #3a3a3c;
+}
+
+[data-theme="dark"] .total-price {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .btn-checkout {
+  background-color: #0a84ff;
+}
+
+[data-theme="dark"] .btn-checkout:hover {
+  background-color: #409cff;
+}
+
+[data-theme="dark"] .empty-state {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .modal-loading {
+  color: #8e8e93;
+}
 @media screen and (max-width: 768px) {
   .side-modal-content {
     width: 100%;

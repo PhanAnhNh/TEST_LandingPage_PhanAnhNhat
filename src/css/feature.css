@@ -233,6 +233,38 @@
   }
 }
 
+[data-theme="dark"] .features-section {
+  background-color: #1c1c1e;
+}
+
+[data-theme="dark"] .features-header h2 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .feature-card {
+  background-color: #2c2c2e;
+}
+
+[data-theme="dark"] .feature-card h3 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .feature-card p {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .section-tag {
+  color: #0a84ff;
+}
+
+[data-theme="dark"] .explore-link {
+  color: #0a84ff;
+}
+
+[data-theme="dark"] .explore-link:hover {
+  color: #409cff;
+}
+
 @media screen and (max-width: 480px) {
   .features-grid {
     grid-template-columns: 1fr;

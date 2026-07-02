@@ -77,11 +77,8 @@
   100% { background-position: 200% 0; }
 }
 
-
-/* --- BÍ QUYẾT 2: NỘI DUNG CO GIÃN THEO VIEWPORT (FLUID RESPONSIVE) --- */
 .hero-content {
   position: absolute;
-  /* Dùng clamp(Min, Tỷ lệ linh hoạt theo chiều rộng màn hình, Max) */
   bottom: 8vw; 
   left: clamp(16px, 7vw, 100px);
   right: clamp(16px, 7vw, 100px);
@@ -97,7 +94,7 @@
 
 .button-group {
   display: flex;
-  gap: clamp(8px, 1vw, 14px); /* Khoảng cách giữa các nút tự thu nhỏ mượt mà */
+  gap: clamp(8px, 1vw, 14px); 
   justify-content: flex-start;
 }
 
@@ -109,7 +106,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  white-space: nowrap; /* Tránh việc chữ bị xuống dòng khi nút quá nhỏ */
+  white-space: nowrap;
 }
 
 .btn-buy {
@@ -132,13 +129,34 @@
 
 .btn-watch:hover {
   background: rgba(0, 0, 0, 0.15);
-  border-color: #dadada;
+  border-color: #000000;
+}
+[data-theme="dark"] .btn-watch {
+  color: #000000;
+  border-color: rgba(93, 93, 93, 0.4);
 }
 
+[data-theme="dark"] .btn-watch:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 0, 0, 0.6);
+}
 
-/* --- CHỈ DÙNG MEDIA QUERY ĐỂ THAY ĐỔI CẤU TRÚC (NẾU CẦN) --- */
+[data-theme="dark"] .banner-skeleton-overlay .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 25%,
+    #3a3a3a 50%,
+    #2a2a2a 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+[data-theme="dark"] .banner-loading-icon svg {
+  stroke: #666;
+}
+
 @media screen and (max-width: 520px) {
-  /* Khi màn hình quá nhỏ (Mobile dọc), chuyển các nút thành hàng dọc lồng nhau cho dễ bấm */
   .button-group {
     flex-direction: column;
     gap: 8px;

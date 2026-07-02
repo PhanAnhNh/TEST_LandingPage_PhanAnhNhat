@@ -3,7 +3,6 @@ import '../css/accessories.css';
 import '../css/Skeleton.css';
 import { productService, cartService, favoriteService } from '../api/productApi';
 
-// 👇 Component Skeleton Card
 const SkeletonCard = () => (
   <div className="acc-card skeleton-card">
     <div className="acc-card-top">
@@ -44,26 +43,22 @@ const Accessories = ({ authTrigger }) => {
     } catch (error) {
       console.error("Lỗi khi tải dữ liệu phụ kiện:", error);
     } finally {
-      // 👇 Delay nhẹ để thấy hiệu ứng skeleton (tùy chọn)
       setTimeout(() => {
         setLoading(false);
       }, 500);
     }
   };
 
-  // Load dữ liệu lần đầu
   useEffect(() => {
     fetchData();
   }, []);
 
-  // Refresh khi authTrigger thay đổi
   useEffect(() => {
     if (authTrigger !== undefined) {
       fetchData();
     }
   }, [authTrigger]);
-
-  // Lắng nghe sự kiện storage
+  
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === 'access_token') {
@@ -123,14 +118,20 @@ const Accessories = ({ authTrigger }) => {
     }
   };
 
-  // 👇 Render Skeleton khi đang loading
   if (loading) {
     return (
       <section id="accessories" className="acc-section">
         <div className="acc-container">
           <div className="acc-header">
-            <span className="section-tag">ACCESSORIES</span>
-            <h2>Mix and match.<br />Made for iPad Air.</h2>
+            <div className="acc-header-left">
+              <span className="section-tag">ACCESSORIES</span>
+              <h2>Mix and match.<br />Made for <span>iPad Air</span>.</h2>
+            </div>
+            <div className="acc-header-right">
+              <a href="#all-accessories" className="view-all">
+                View All →
+              </a>
+            </div>
           </div>
           <div className="acc-grid">
             {[1, 2, 3, 4, 5, 6].map((item) => (
@@ -146,9 +147,17 @@ const Accessories = ({ authTrigger }) => {
     <section id="accessories" className="acc-section">
       <div className="acc-container">
         <div className="acc-header">
-          <span className="section-tag">ACCESSORIES</span>
-          <h2>Mix and match.<br />Made for iPad Air.</h2>
+          <div className="acc-header-left">
+            <span className="section-tag">ACCESSORIES</span>
+            <h2>Mix and match.<br />Made for <span>iPad Air</span>.</h2>
+          </div>
+          <div className="acc-header-right">
+            <a href="#all-accessories" className="view-all">
+              View All →
+            </a>
+          </div>
         </div>
+        
         <div className="acc-grid">
           {accessories.map((item) => (
             <div 
@@ -157,7 +166,9 @@ const Accessories = ({ authTrigger }) => {
               onClick={() => setSelectedAccessory(item)}
             >
               <div className="acc-card-top">
-                <span className="acc-product-tag">{item.stock > 0 ? "New" : "Out of stock"}</span>
+                <span className={`acc-product-tag ${item.stock <= 0 ? 'out-of-stock' : ''}`}>
+                  {item.stock > 0 ? "New" : "Out of stock"}
+                </span>
                 <button 
                   className={`acc-heart-btn ${favorites.includes(item.id) ? 'active' : ''}`}
                   onClick={(e) => toggleFavorite(item.id, e)}
@@ -183,12 +194,15 @@ const Accessories = ({ authTrigger }) => {
 
               <div className="acc-card-info">
                 <h3>{item.name}</h3>
-                <p className="acc-price">${item.price?.toFixed(2)}</p>
+                <p className="acc-price">
+                  <span className="currency">$</span>{item.price?.toFixed(2)}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
+      
       {selectedAccessory && (
         <div className="acc-modal-overlay" onClick={() => setSelectedAccessory(null)}>
           <div className="acc-modal-card" onClick={(e) => e.stopPropagation()}>
@@ -204,9 +218,13 @@ const Accessories = ({ authTrigger }) => {
               </div>
               
               <div className="acc-modal-right">
-                <span className="acc-modal-tag">{selectedAccessory.stock > 0 ? "Available" : "Out of stock"}</span>
+                <span className={`acc-modal-tag ${selectedAccessory.stock <= 0 ? 'out-of-stock' : ''}`}>
+                  {selectedAccessory.stock > 0 ? "Available" : "Out of stock"}
+                </span>
                 <h2 className="acc-modal-title">{selectedAccessory.name}</h2>
-                <p className="acc-modal-price">${selectedAccessory.price?.toFixed(2)}</p>
+                <p className="acc-modal-price">
+                  <span className="currency">$</span>{selectedAccessory.price?.toFixed(2)}
+                </p>
                 <p className="acc-modal-desc">{selectedAccessory.description || "No description available."}</p>
                 
                 <div className="acc-modal-actions">

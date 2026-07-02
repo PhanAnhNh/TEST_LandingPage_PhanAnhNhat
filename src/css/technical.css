@@ -105,6 +105,9 @@
   object-fit: contain;
 }
 
+/* ======================== */
+/* Newsletter Section */
+/* ======================== */
 .newsletter-section {
   background: #eaeaf2;
   padding: 60px 22px;
@@ -113,6 +116,11 @@
 .newsletter-container {
   max-width: 1100px;
   margin: 0 auto;
+  /* 👇 Thêm padding cho container */
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .newsletter-content {
@@ -236,6 +244,95 @@
 }
 
 /* ======================== */
+/* DARK MODE */
+/* ======================== */
+[data-theme="dark"] .specs-section {
+  background-color: #1c1c1e;
+}
+
+[data-theme="dark"] .specs-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .spec-row {
+  background: #2c2c2e;
+  border-color: #3a3a3c;
+}
+
+[data-theme="dark"] .spec-label {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .spec-value {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .specs-image-mockup {
+  background: #2c2c2e;
+  border-color: #3a3a3c;
+}
+
+[data-theme="dark"] .section-tag {
+  background: #2c2c2e;
+  color: #0a84ff;
+}
+
+/* 👇 Dark Mode cho Newsletter - ĐÃ SỬA */
+[data-theme="dark"] .newsletter-section {
+  background: #1c1c1e;
+}
+
+[data-theme="dark"] .newsletter-container {
+  background: #2c2c2e;
+  border: 1px solid #4a4a4c;  /* 👈 Đã sửa đúng cú pháp */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .newsletter-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .newsletter-desc {
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .email-input {
+  background: #1c1c1e;
+  border-color: #3a3a3c;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .email-input::placeholder {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .email-input:focus {
+  border-color: #0a84ff;
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+}
+
+[data-theme="dark"] .checkbox-label {
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .checkbox-label:hover {
+  color: #ffffff;
+  opacity: 1;
+}
+
+[data-theme="dark"] .subscribe-btn {
+  background: #0a84ff;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .subscribe-btn:hover {
+  background: #409cff;
+}
+
+/* ======================== */
 /* RESPONSIVE */
 /* ======================== */
 @media screen and (max-width: 1024px) {
@@ -296,6 +393,10 @@
     padding: 40px 16px;
   }
   
+  .newsletter-container {
+    padding: 30px 20px;
+  }
+  
   .newsletter-content {
     flex-direction: column;
     text-align: center;
@@ -354,6 +455,10 @@
   
   .newsletter-section {
     padding: 30px 12px;
+  }
+  
+  .newsletter-container {
+    padding: 20px 16px;
   }
   
   .newsletter-title {
