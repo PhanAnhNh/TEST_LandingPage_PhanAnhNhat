@@ -2,7 +2,7 @@ import axiosClient from '../api/api';
 
 export const productService = {
   getProducts: async (category = 'accessories') => {
-    const response = await axiosClient.get('/products/', {
+    const response = await axiosClient.get('/products', {
       params: { category }
     });
     return response.data;
