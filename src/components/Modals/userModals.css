@@ -1,0 +1,166 @@
+.side-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.side-modal-content {
+  width: 380px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: slideIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.side-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d2d2d7;
+  padding-bottom: 16px;
+}
+
+.side-modal-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #1d1d1f;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #86868b;
+}
+
+.modal-body-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.items-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.modal-item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.item-info h4 {
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  color: #1d1d1f;
+}
+
+.item-price {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0066cc;
+}
+
+.item-category {
+  font-size: 11px;
+  background: #f5f5f7;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #86868b;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d2d2d7;
+  border-radius: 6px;
+  width: fit-content;
+  padding: 2px;
+}
+
+.quantity-control button {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+.side-modal-footer {
+  border-top: 1px solid #d2d2d7;
+  padding-top: 20px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.total-price {
+  font-size: 20px;
+  color: #1d1d1f;
+}
+
+.btn-checkout {
+  width: 100%;
+  background-color: #0071e3;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn-checkout:hover {
+  background-color: #0077ed;
+}
+
+.empty-state, .modal-loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #86868b;
+  font-size: 14px;
+}

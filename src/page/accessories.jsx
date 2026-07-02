@@ -1,83 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/accessories.css';
+import { productService, cartService, favoriteService } from '../api/productApi';
 
 const Accessories = () => {
-  // Danh sách sản phẩm phụ kiện mẫu
-  const accessoriesData = [
-    {
-      id: 1,
-      name: "Apple Pencil Pro",
-      tag: "New",
-      price: "$129.00",
-      desc: "Pixel-perfect precision, low latency, and tilt sensitivity. Supports squeeze, barrel roll, and haptic feedback.",
-      icon: "✏️" // Bạn có thể thay bằng import img nếu có asset hình ảnh riêng
-    },
-    {
-      id: 2,
-      name: "Magic Keyboard for iPad Air",
-      tag: "Best Seller",
-      price: "$299.00",
-      desc: "Incredible typing experience, a trackpad that opens up new ways to work with iPadOS, and front and back protection.",
-      icon: "⌨️"
-    },
-    {
-      id: 3,
-      name: "Smart Folio for iPad Air",
-      tag: "Multi-colors",
-      price: "$79.00",
-      desc: "Thin and light, protection for the front and back. It automatically wakes your iPad when opened and sleeps when closed.",
-      icon: "📔"
-    },
-    {
-      id: 4,
-      name: "35W Dual USB-C Power Adapter",
-      tag: "Essential",
-      price: "$59.00",
-      desc: "Allows you to charge two devices at the same time, whether you’re at home, in the office, or on the go.",
-      icon: "🔌"
-    }
-  ];
-
-  // Quản lý trạng thái đóng/mở xem chi tiết phụ kiện
+  const [accessories, setAccessories] = useState([]); 
+  const [loading, setLoading] = useState(true);        
   const [selectedAccessory, setSelectedAccessory] = useState(null);
-  
-  // Quản lý trạng thái danh sách yêu thích (Lưu danh sách ID đã thả tim)
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);      
 
-  // Hàm xử lý khi bấm thả tim yêu thích
-  const toggleFavorite = (id, e) => {
-    e.stopPropagation(); // Ngăn việc bấm tim bị kích hoạt mở Modal chi tiết
-    if (favorites.includes(id)) {
-      setFavorites(favorites.filter(favId => favId !== id));
-    } else {
-      setFavorites([...favorites, id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        
+        const productData = await productService.getProducts('accessories');
+        setAccessories(productData);
+
+        const token = localStorage.getItem('access_token');
+        if (token) {
+          const favData = await favoriteService.getFavorites();
+          const favIds = favData.favorites.map(item => item.id);
+          setFavorites(favIds);
+        }
+      } catch (error) {
+        console.error("Lỗi khi tải dữ liệu phụ kiện:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const toggleFavorite = async (id, e) => {
+    e.stopPropagation(); 
+    
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      alert("Vui lòng đăng nhập để sử dụng tính năng yêu thích!");
+      return;
+    }
+
+    try {
+      if (favorites.includes(id)) {
+        await favoriteService.removeFavorite(id);
+        setFavorites(favorites.filter(favId => favId !== id));
+      } else {
+        await favoriteService.addFavorite(id);
+        setFavorites([...favorites, id]);
+      }
+    } catch (error) {
+      console.error("Lỗi thao tác yêu thích:", error);
+      alert("Không thể cập nhật danh sách yêu thích. Hãy thử lại!");
+    }
+  };
+  const handleAddToCart = async (productId, productName) => {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!");
+      return;
+    }
+
+    try {
+      await cartService.addToCart(productId, 1);
+      alert(`Đã thêm thành công ${productName} vào giỏ hàng của bạn!`);
+    } catch (error) {
+      console.error("Lỗi thêm giỏ hàng:", error);
+      alert("Thêm vào giỏ hàng thất bại. Vui lòng kiểm tra lại.");
     }
   };
 
-  const handleAddToCart = (productName) => {
-    alert(`Added ${productName} to your cart successfully!`);
-  };
+  if (loading) {
+    return (
+      <div className="acc-loading" style={{ textTransform: 'uppercase', textAlign: 'center', padding: '50px', fontSize: '14px', letterSpacing: '1px' }}>
+        Loading Accessories...
+      </div>
+    );
+  }
 
   return (
     <section id="accessories" className="acc-section">
       <div className="acc-container">
-        {/* Header Tiêu đề */}
         <div className="acc-header">
           <span className="section-tag">ACCESSORIES</span>
           <h2>Mix and match.<br />Made for iPad Air.</h2>
         </div>
-
-        {/* Lưới hiển thị Phụ kiện */}
         <div className="acc-grid">
-          {accessoriesData.map((item) => (
+          {accessories.map((item) => (
             <div 
               key={item.id} 
               className="acc-card" 
               onClick={() => setSelectedAccessory(item)}
             >
               <div className="acc-card-top">
-                {item.tag && <span className="acc-product-tag">{item.tag}</span>}
-                {/* Nút Trái tim yêu thích */}
+                <span className="acc-product-tag">{item.stock > 0 ? "New" : "Out of stock"}</span>
                 <button 
                   className={`acc-heart-btn ${favorites.includes(item.id) ? 'active' : ''}`}
                   onClick={(e) => toggleFavorite(item.id, e)}
@@ -89,42 +105,48 @@ const Accessories = () => {
               </div>
 
               <div className="acc-image-placeholder">
-                <span className="acc-emoji">{item.icon}</span>
+                {item.images && item.images.length > 0 ? (
+                  <img src={item.images[0]} alt={item.name} className="acc-product-img" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                ) : (
+                  <span className="acc-emoji">📦</span>
+                )}
               </div>
 
               <div className="acc-card-info">
                 <h3>{item.name}</h3>
-                <p className="acc-price">{item.price}</p>
+                <p className="acc-price">${item.price?.toFixed(2)}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-
       {selectedAccessory && (
         <div className="acc-modal-overlay" onClick={() => setSelectedAccessory(null)}>
           <div className="acc-modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="acc-modal-close" onClick={() => setSelectedAccessory(null)}>×</button>
             
             <div className="acc-modal-content">
-              {/* Bên trái: Ảnh đại diện */}
               <div className="acc-modal-left">
-                <span className="acc-modal-emoji">{selectedAccessory.icon}</span>
+                {selectedAccessory.images && selectedAccessory.images.length > 0 ? (
+                  <img src={selectedAccessory.images[0]} alt={selectedAccessory.name} style={{ maxWidth: '80%', maxHeight: '80%', objectFit: 'contain' }} />
+                ) : (
+                  <span className="acc-modal-emoji">📦</span>
+                )}
               </div>
               
-              {/* Bên phải: Thông tin & Hành động */}
               <div className="acc-modal-right">
-                <span className="acc-modal-tag">{selectedAccessory.tag}</span>
+                <span className="acc-modal-tag">{selectedAccessory.stock > 0 ? "Available" : "Out of stock"}</span>
                 <h2 className="acc-modal-title">{selectedAccessory.name}</h2>
-                <p className="acc-modal-price">{selectedAccessory.price}</p>
-                <p className="acc-modal-desc">{selectedAccessory.desc}</p>
+                <p className="acc-modal-price">${selectedAccessory.price?.toFixed(2)}</p>
+                <p className="acc-modal-desc">{selectedAccessory.description || "No description available."}</p>
                 
                 <div className="acc-modal-actions">
                   <button 
                     className="acc-btn-cart" 
-                    onClick={() => handleAddToCart(selectedAccessory.name)}
+                    disabled={selectedAccessory.stock <= 0}
+                    onClick={() => handleAddToCart(selectedAccessory.id, selectedAccessory.name)}
                   >
-                    Add to Cart
+                    {selectedAccessory.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
                   </button>
                   
                   <button 

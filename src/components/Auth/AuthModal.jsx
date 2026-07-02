@@ -1,20 +1,54 @@
 import React, { useState } from 'react';
 import './authModal.css';
+import authApi from '../../api/authApi'; 
 
-const AuthModal = ({ isOpen, onClose }) => {
+const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
   if (!isOpen) return null;
 
-  // State chuyển đổi giữa Đăng nhập (true) và Đăng ký (false)
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isLogin) {
-      console.log("Xử lý Đăng nhập với:", { email, password });
-    } else {
-      console.log("Xử lý Đăng ký với:", { email, password });
+    setErrorMsg('');
+    setIsLoading(true);
+
+    try {
+      if (isLogin) {
+        const response = await authApi.login({ email, password });
+        console.log("Đăng nhập thành công:", response.data);
+        
+        // Lưu access_token vào localStorage
+        localStorage.setItem('access_token', response.data.access_token);
+        
+        // Gọi callback để cập nhật state ở component cha
+        if (onLoginSuccess) {
+          onLoginSuccess();
+        }
+        
+        // Đóng modal
+        onClose();
+      } else {
+        const response = await authApi.register({ email, password });
+        console.log("Đăng ký thành công:", response.data);
+        
+        alert("Đăng ký thành công! Vui lòng đăng nhập.");
+        setIsLogin(true); 
+        setPassword(''); 
+        setEmail('');
+      }
+    } catch (error) {
+      console.error("Lỗi xác thực:", error);
+      if (error.response && error.response.data && error.response.data.detail) {
+        setErrorMsg(error.response.data.detail);
+      } else {
+        setErrorMsg("Có lỗi xảy ra, vui lòng thử lại sau.");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -34,6 +68,8 @@ const AuthModal = ({ isOpen, onClose }) => {
             {isLogin ? 'Manage your account and preferences' : 'One account for all of Apple'}
           </p>
         </div>
+
+        {errorMsg && <div style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>{errorMsg}</div>}
 
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="auth-input-group">
@@ -58,8 +94,8 @@ const AuthModal = ({ isOpen, onClose }) => {
             />
           </div>
 
-          <button type="submit" className="auth-primary-btn">
-            {isLogin ? 'Sign In' : 'Sign Up'}
+          <button type="submit" className="auth-primary-btn" disabled={isLoading}>
+            {isLoading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
           </button>
         </form>
 
@@ -67,7 +103,6 @@ const AuthModal = ({ isOpen, onClose }) => {
           <span>or</span>
         </div>
 
-        {/* Nút Đăng nhập Google */}
         <button className="auth-google-btn" onClick={handleGoogleLogin}>
           <svg className="google-icon" viewBox="0 0 24 24">
             <path fill="#EA4335" d="M12 5.04c1.64 0 3.12.56 4.28 1.67l3.2-3.2C17.52 1.58 14.96 1 12 1 7.35 1 3.37 3.65 1.39 7.56l3.74 2.9C6.01 7.42 8.79 5.04 12 5.04z"/>
@@ -80,9 +115,9 @@ const AuthModal = ({ isOpen, onClose }) => {
 
         <div className="auth-toggle">
           {isLogin ? (
-            <p>Don't have an Account? <span onClick={() => setIsLogin(false)}>Create yours now.</span></p>
+            <p>Don't have an Account? <span onClick={() => { setIsLogin(false); setErrorMsg(''); }}>Create yours now.</span></p>
           ) : (
-            <p>Already have an Account? <span onClick={() => setIsLogin(true)}>Sign in here.</span></p>
+            <p>Already have an Account? <span onClick={() => { setIsLogin(true); setErrorMsg(''); }}>Sign in here.</span></p>
           )}
         </div>
       </div>
