@@ -9,28 +9,37 @@ import TechSpecs from './page/technical'
 import Banner from './page/banner'
 import Footer from './components/Footers/footer'
 
+// BƯỚC 1: Bạn phải import AuthModal vào đây (hãy kiểm tra lại đường dẫn file cho đúng)
+import AuthModal from './components/Auth/AuthModal' 
+import Accessories from './page/accessories'
+
 function App() {
   const [count, setCount] = useState(0)
-
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  
   return (
     <div className="app-container">
-      {/* 1. Thanh Menu Điều Hướng cố định */}
-      <Header />
+      
+      <Header onLoginClick={() => setIsAuthOpen(true)}/>
 
-      {/* 2. Phần Thân Landing Page */}
+      
       <main>
-        {/* Banner chính đầu trang */}
+        
         <Banner />
 
-        {/* Khối các tính năng lưới */}
+        
         <Features />
 
-        {/* Khối bảng thông số kỹ thuật chi tiết */}
+        
         <TechSpecs />
+
+        <Accessories />
       </main>
 
-      {/* 3. Phần chân trang */}
+      
       <Footer />
+
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </div>
   )
 }
