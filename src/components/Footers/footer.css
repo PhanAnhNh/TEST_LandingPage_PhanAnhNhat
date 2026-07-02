@@ -116,7 +116,42 @@
   color: var(--apple-border);
 }
 
-/* Responsive Design */
+[data-theme="dark"] .apple-footer {
+  background-color: #1c1c1e;
+  border-top-color: #3a3a3c;
+}
+
+[data-theme="dark"] .footer-column h3 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .footer-column ul li a {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-column ul li a:hover {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .footer-top {
+  border-bottom-color: #3a3a3c;
+}
+
+[data-theme="dark"] .footer-copyright {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-legal a {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .footer-legal a:hover {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .footer-separator {
+  color: #3a3a3c;
+}
 @media (max-width: 992px) {
   .footer-links-grid {
     grid-template-columns: repeat(3, 1fr);

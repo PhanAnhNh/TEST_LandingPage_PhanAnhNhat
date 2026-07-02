@@ -85,11 +85,11 @@ const Header = ({
           
           <nav className="header-nav">
             <ul>
-              <li><a href="#overview">Overview</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#tech-specs">Tech Specs</a></li>
-              <li><a href="#accessories">Accessories</a></li>
-              <li><a href="#support">Support</a></li>
+              <li><a href="#overview"><p>Overview</p></a></li>
+              <li><a href="#features"><p>Features</p></a></li>
+              <li><a href="#tech-specs"><p>Tech Specs</p></a></li>
+              <li><a href="#accessories"><p>Accessories</p></a></li>
+              <li><a href="#support"><p>Support</p></a></li>
             </ul>
           </nav>
 

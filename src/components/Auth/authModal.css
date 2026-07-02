@@ -185,9 +185,75 @@
   text-decoration: underline;
 }
 
-/* ======================== */
-/* RESPONSIVE */
-/* ======================== */
+[data-theme="dark"] .auth-modal {
+  background: #1c1c1e;
+}
+
+[data-theme="dark"] .auth-apple-logo {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .auth-header h2 {
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .auth-subtitle {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .auth-input {
+  background: #2c2c2e;
+  border-color: #3a3a3c;
+  color: #f5f5f7;
+}
+
+[data-theme="dark"] .auth-input:focus {
+  border-color: #0a84ff;
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+}
+
+[data-theme="dark"] .auth-primary-btn {
+  background: #0a84ff;
+}
+
+[data-theme="dark"] .auth-primary-btn:hover {
+  background: #409cff;
+}
+
+[data-theme="dark"] .auth-divider::before {
+  background: #3a3a3c;
+}
+
+[data-theme="dark"] .auth-divider span {
+  background: #1c1c1e;
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .auth-google-btn {
+  background: #2c2c2e;
+  color: #f5f5f7;
+  border-color: #3a3a3c;
+}
+
+[data-theme="dark"] .auth-google-btn:hover {
+  background: #3a3a3c;
+}
+
+[data-theme="dark"] .auth-toggle {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .auth-toggle span {
+  color: #0a84ff;
+}
+
+[data-theme="dark"] .auth-close-btn {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .auth-close-btn:hover {
+  color: #f5f5f7;
+}
 @media screen and (max-width: 768px) {
   .auth-modal {
     padding: 32px 24px;
@@ -236,5 +302,84 @@
 
   .auth-apple-logo {
     font-size: 28px;
+  }
+}
+
+/* Thêm vào cuối file authModal.css */
+
+/* ======================================================== */
+/* PASSWORD TOGGLE BUTTON */
+/* ======================================================== */
+.password-group {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  padding-right: 50px !important; /* Tạo khoảng trống cho nút toggle */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8e8e93;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.password-toggle-btn:hover {
+  color: #1d1d1f;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.password-toggle-btn:focus {
+  outline: 2px solid rgba(0, 122, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.password-toggle-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.password-toggle-btn:hover svg {
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .password-toggle-btn {
+  color: #8e8e93;
+}
+
+[data-theme="dark"] .password-toggle-btn:hover {
+  color: #f5f5f7;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .password-toggle-btn:focus {
+  outline-color: rgba(10, 132, 255, 0.3);
+}
+
+@media screen and (max-width: 480px) {
+  .password-toggle-btn {
+    right: 10px;
+    padding: 6px;
+  }
+  
+  .password-toggle-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .password-input {
+    padding-right: 44px !important;
   }
 }
