@@ -21,7 +21,7 @@ const Header = () => {
         </nav>
 
         <div className="header-actions">
-          <button className="btn-blue">Buy Now</button>
+          <button className="btn-blue">Login</button>
         </div>
       </div>
     </header>
