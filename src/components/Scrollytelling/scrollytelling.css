@@ -1,0 +1,206 @@
+.scrollytelling-section {
+  position: relative;
+  min-height: 210vh; 
+  overflow: hidden;
+}
+
+.scrollytelling-bg {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- MOCKUP IPAD --- */
+.parallax-ipad {
+  position: absolute;
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(340px, 40vw);
+  aspect-ratio: 3.2 / 4.2; 
+  z-index: 1;
+}
+
+.ipad-device-frame {
+  width: 100%;
+  height: 100%;
+  background: #1e1e1f;
+  border-radius: 32px;
+  padding: 14px;
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.25),
+    inset 0 0 2px 1px rgba(255, 255, 255, 0.2);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ipad-camera {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background: #000;
+  border-radius: 50%;
+}
+
+.ipad-inner-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- SCENE 1: CHIP --- */
+.chip-scene { background: #080810; }
+.m2-chip {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #2c2d30, #0a0a0c);
+  border: 1.5px solid #515257; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 800; font-size: 22px;
+  letter-spacing: -0.5px; position: relative; z-index: 2;
+}
+.chip-glow {
+  position: absolute; width: 130px; height: 130px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.4) 0%, transparent 70%);
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* --- SCENE 2: RETINA --- */
+.retina-scene { background: #000; }
+.fluid-gradient {
+  width: 140%; height: 140%;
+  background: conic-gradient(from 180deg, #ff4500, #ff007f, #7000ff, #007aff, #ff4500);
+  filter: blur(20px); animation: rotateBg 10s linear infinite;
+}
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- SCENE 3: PENCIL --- */
+.pencil-scene { background: #ffffff; }
+.drawing-line { width: 80%; height: 80%; }
+.drawing-line path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawStroke 3s ease-in-out forwards; }
+@keyframes drawStroke { to { stroke-dashoffset: 0; } }
+.virtual-pencil {
+  position: absolute; width: 8px; height: 90px;
+  background: linear-gradient(to right, #e3e3e5, #f5f5f7, #d2d2d7);
+  border-radius: 4px 4px 1px 1px; transform: rotate(45deg);
+  top: 20%; right: 25%; box-shadow: -5px 10px 15px rgba(0,0,0,0.1);
+}
+
+/* --- SCENE 4: OS --- */
+.ipados-scene { background: #2a2c32; padding: 12px; box-sizing: border-box; display: block; }
+.dock {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 14px; background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px); border-radius: 8px; display: flex; justify-content: center; align-items: center; gap: 6px;
+}
+.dock-item { width: 8px; height: 8px; background: #fff; border-radius: 2px; }
+.app-window { background: rgba(255, 255, 255, 0.9); border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); position: absolute; }
+.win-1 { width: 55%; height: 65%; top: 15%; left: 10%; background: #ffffff; }
+.win-2 { width: 45%; height: 50%; top: 25%; right: 10%; background: #e8e8ed; }
+
+/* --- CONTENT OVERLAY --- */
+.scrollytelling-content {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 80px;
+  pointer-events: none;
+  z-index: 2;
+  box-sizing: border-box;
+}
+.scrollytelling-content > * { pointer-events: auto; }
+
+.progress-tracker {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+}
+.progress-dot.active {
+  background: #007aff;
+  transform: scale(1.3);
+}
+[data-theme="dark"] .progress-dot { background: rgba(255, 255, 255, 0.2); }
+[data-theme="dark"] .progress-dot.active { background: #0a84ff; }
+
+.scene {
+  position: absolute;
+  left: 120px;
+  max-width: 480px;
+  opacity: 0;
+}
+.scene.active { opacity: 1; }
+.scene-content { display: flex; flex-direction: column; gap: 16px; }
+.scene-icon { font-size: 40px; }
+.scene h2 { font-size: 42px; font-weight: 700; line-height: 1.15; margin: 0; letter-spacing: -0.02em; }
+.scene p { font-size: 17px; line-height: 1.5; opacity: 0.8; margin: 0; }
+.btn-learn-more {
+  background: #007aff; color: #fff; border: none; padding: 10px 24px;
+  border-radius: 30px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .scrollytelling-content { padding: 0 40px; }
+  .scene { left: 80px; max-width: 40%; }
+  .scene h2 { font-size: 32px; }
+  .parallax-ipad { right: 6%; width: 260px; }
+}
+
+@media (max-width: 768px) {
+  .scrollytelling-content { justify-content: center; text-align: center; padding: 0 24px; }
+  .scene { left: 50%; transform: translateX(-50%) !important; max-width: 85%; }
+  .scene.active { transform: translateX(-50%) !important; }
+  .scene h2 { font-size: 28px; }
+  .scene p { font-size: 15px; }
+  
+  .parallax-ipad {
+    right: 50%;
+    top: 45%;
+    transform: translate(50%, -50%) !important;
+    width: 280px;
+    opacity: 0.15 !important;
+  }
+}

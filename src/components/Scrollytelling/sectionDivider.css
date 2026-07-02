@@ -1,0 +1,82 @@
+/* components/Scrollytelling/sectionDivider.css */
+.section-divider {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  transition: background-color 0.3s ease;
+}
+
+.divider-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.divider-content h2 {
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px 0;
+  transition: color 0.3s ease;
+}
+
+.divider-content p {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  transition: color 0.3s ease;
+}
+
+.divider-line {
+  height: 3px;
+  width: 80px;
+  margin: 0 auto;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: background 0.3s ease;
+}
+
+/* Dark mode - override nếu cần */
+[data-theme="dark"] .section-divider {
+  /* Màu nền sẽ được set qua props, không bị override */
+}
+
+[data-theme="dark"] .divider-content h2 {
+  /* Màu sẽ được set qua props */
+}
+
+[data-theme="dark"] .divider-content p {
+  /* Màu sẽ được set qua props */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-divider {
+    min-height: 40vh;
+    padding: 60px 20px;
+  }
+  
+  .divider-content h2 {
+    font-size: 36px;
+  }
+  
+  .divider-content p {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-divider {
+    min-height: 30vh;
+    padding: 40px 16px;
+  }
+  
+  .divider-content h2 {
+    font-size: 28px;
+  }
+  
+  .divider-content p {
+    font-size: 15px;
+  }
+}
