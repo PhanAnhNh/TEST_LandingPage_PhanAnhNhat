@@ -1,7 +1,8 @@
 import React from 'react';
 import './header.css';
 
-const Header = () => {
+// Thêm prop onLoginClick vào component
+const Header = ({ onLoginClick }) => {
   return (
     <header className="apple-header">
       <div className="header-container">
@@ -21,7 +22,8 @@ const Header = () => {
         </nav>
 
         <div className="header-actions">
-          <button className="btn-blue">Login</button>
+          {/* Gán sự kiện click vào đây */}
+          <button className="btn-blue" onClick={onLoginClick}>Login</button>
         </div>
       </div>
     </header>
