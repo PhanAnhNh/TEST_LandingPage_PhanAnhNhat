@@ -2,18 +2,48 @@ import React, { useState, useEffect, useRef } from 'react';
 import './header.css';
 import { CartModal, FavoritesModal } from '../Modals/UserModals'; 
 
-
-const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
+const Header = ({ 
+  onLoginClick, 
+  isLoggedIn, 
+  setIsLoggedIn,
+  onLogout, // 👈 Nhận callback từ App
+  authTrigger // 👈 Nhận trigger để biết khi nào refresh
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);          
-  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false); 
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
   const dropdownRef = useRef(null);
 
+  // Áp dụng theme
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDarkMode]);
+
+  // Kiểm tra theme từ localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }, []);
+
+  // Kiểm tra token
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token) setIsLoggedIn(true);
-  }, [setIsLoggedIn]);
+  }, [setIsLoggedIn, authTrigger]); // 👈 Thêm authTrigger để refresh
 
+  // Click outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -28,7 +58,20 @@ const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
     localStorage.removeItem('access_token');
     setIsLoggedIn(false);
     setIsDropdownOpen(false);
+    
+    // 👇 Dispatch event để thông báo logout
     window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new CustomEvent('authChange'));
+    
+    // 👇 Gọi callback từ App nếu có
+    if (onLogout) {
+      onLogout();
+    }
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -71,11 +114,22 @@ const Header = ({ onLoginClick, isLoggedIn, setIsLoggedIn }) => {
                   
                   {isDropdownOpen && (
                     <div className="user-dropdown">
-                     
-                      <button className="dropdown-item" onClick={() => { setIsFavoritesOpen(true); setIsDropdownOpen(false); }}>
-                        Sản phẩm yêu thích
+                      <button className="dropdown-item theme-toggle" onClick={toggleTheme}>
+                        <span className="theme-icon">
+                          {isDarkMode ? '🌙' : '☀️'}
+                        </span>
+                        {isDarkMode ? 'Chế độ tối' : 'Chế độ sáng'}
+                        <span className="theme-switch">
+                          <span className={`switch-slider ${isDarkMode ? 'active' : ''}`}></span>
+                        </span>
                       </button>
-                      <button className="dropdown-item logout-text" onClick={handleLogout}>Đăng xuất</button>
+                      
+                      <button className="dropdown-item" onClick={() => { setIsFavoritesOpen(true); setIsDropdownOpen(false); }}>
+                        ❤️ Sản phẩm yêu thích
+                      </button>
+                      <button className="dropdown-item logout-text" onClick={handleLogout}>
+                        🚪 Đăng xuất
+                      </button>
                     </div>
                   )}
                 </div>

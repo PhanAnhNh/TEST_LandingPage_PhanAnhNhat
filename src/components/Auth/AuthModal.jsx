@@ -21,10 +21,11 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
         const response = await authApi.login({ email, password });
         console.log("Đăng nhập thành công:", response.data);
         
-        // Lưu access_token vào localStorage
         localStorage.setItem('access_token', response.data.access_token);
         
-        // Gọi callback để cập nhật state ở component cha
+        window.dispatchEvent(new Event('storage'));
+        window.dispatchEvent(new CustomEvent('authChange'));
+
         if (onLoginSuccess) {
           onLoginSuccess();
         }

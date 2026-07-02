@@ -1,35 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import '../css/accessories.css';
+import '../css/Skeleton.css';
 import { productService, cartService, favoriteService } from '../api/productApi';
 
-const Accessories = () => {
+// 👇 Component Skeleton Card
+const SkeletonCard = () => (
+  <div className="acc-card skeleton-card">
+    <div className="acc-card-top">
+      <div className="skeleton" style={{ width: '50px', height: '20px' }}></div>
+      <div className="skeleton" style={{ width: '30px', height: '30px', borderRadius: '50%' }}></div>
+    </div>
+    <div className="acc-image-placeholder">
+      <div className="skeleton" style={{ width: '100%', height: '150px' }}></div>
+    </div>
+    <div className="acc-card-info">
+      <div className="skeleton" style={{ width: '80%', height: '20px', marginBottom: '8px' }}></div>
+      <div className="skeleton" style={{ width: '40%', height: '18px' }}></div>
+    </div>
+  </div>
+);
+
+const Accessories = ({ authTrigger }) => {
   const [accessories, setAccessories] = useState([]); 
   const [loading, setLoading] = useState(true);        
   const [selectedAccessory, setSelectedAccessory] = useState(null);
   const [favorites, setFavorites] = useState([]);      
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        
-        const productData = await productService.getProducts('accessories');
-        setAccessories(productData);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      
+      const productData = await productService.getProducts('accessories');
+      setAccessories(productData);
 
-        const token = localStorage.getItem('access_token');
-        if (token) {
-          const favData = await favoriteService.getFavorites();
-          const favIds = favData.favorites.map(item => item.id);
-          setFavorites(favIds);
-        }
-      } catch (error) {
-        console.error("Lỗi khi tải dữ liệu phụ kiện:", error);
-      } finally {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        const favData = await favoriteService.getFavorites();
+        const favIds = favData.favorites.map(item => item.id);
+        setFavorites(favIds);
+      } else {
+        setFavorites([]);
+      }
+    } catch (error) {
+      console.error("Lỗi khi tải dữ liệu phụ kiện:", error);
+    } finally {
+      // 👇 Delay nhẹ để thấy hiệu ứng skeleton (tùy chọn)
+      setTimeout(() => {
         setLoading(false);
+      }, 500);
+    }
+  };
+
+  // Load dữ liệu lần đầu
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Refresh khi authTrigger thay đổi
+  useEffect(() => {
+    if (authTrigger !== undefined) {
+      fetchData();
+    }
+  }, [authTrigger]);
+
+  // Lắng nghe sự kiện storage
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'access_token') {
+        fetchData();
       }
     };
 
-    fetchData();
+    const handleAuthChange = () => {
+      fetchData();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('authChange', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('authChange', handleAuthChange);
+    };
   }, []);
 
   const toggleFavorite = async (id, e) => {
@@ -54,6 +106,7 @@ const Accessories = () => {
       alert("Không thể cập nhật danh sách yêu thích. Hãy thử lại!");
     }
   };
+
   const handleAddToCart = async (productId, productName) => {
     const token = localStorage.getItem('access_token');
     if (!token) {
@@ -70,11 +123,22 @@ const Accessories = () => {
     }
   };
 
+  // 👇 Render Skeleton khi đang loading
   if (loading) {
     return (
-      <div className="acc-loading" style={{ textTransform: 'uppercase', textAlign: 'center', padding: '50px', fontSize: '14px', letterSpacing: '1px' }}>
-        Loading Accessories...
-      </div>
+      <section id="accessories" className="acc-section">
+        <div className="acc-container">
+          <div className="acc-header">
+            <span className="section-tag">ACCESSORIES</span>
+            <h2>Mix and match.<br />Made for iPad Air.</h2>
+          </div>
+          <div className="acc-grid">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <SkeletonCard key={item} />
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 

@@ -1,6 +1,3 @@
-/* ======================================================== */
-/* Accessories Section Layout */
-/* ======================================================== */
 .acc-section {
   padding: 80px 24px;
   background-color: #ffffff;
@@ -24,14 +21,12 @@
   letter-spacing: -0.02em;
 }
 
-/* Lưới sản phẩm phụ kiện */
 .acc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-/* Thẻ phụ kiện */
 .acc-card {
   background: #f5f5f7;
   border-radius: 18px;
@@ -60,10 +55,9 @@
 .acc-product-tag {
   font-size: 12px;
   font-weight: 600;
-  color: #bf4800; /* Màu cam nổi bật đặc trưng Apple Store */
+  color: #bf4800;
 }
 
-/* Nút Trái Tim yêu thích dạng tròn nhỏ trên card */
 .acc-heart-btn {
   background: #ffffff;
   border: none;
@@ -76,6 +70,7 @@
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   transition: transform 0.2s;
+  flex-shrink: 0;
 }
 
 .acc-heart-btn:hover {
@@ -93,17 +88,17 @@
 
 .acc-heart-btn.active .heart-icon,
 .acc-btn-favorite.active .heart-icon {
-  fill: #ff3b30; /* Màu đỏ Apple Heart */
+  fill: #ff3b30;
   stroke: #ff3b30;
 }
 
-/* Khu vực hiển thị ảnh (Tạm thời dùng Emoji kích thước lớn) */
 .acc-image-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
   margin: 20px 0;
+  min-height: 150px;
 }
 
 .acc-emoji {
@@ -124,7 +119,7 @@
 }
 
 /* ======================================================== */
-/* GIAO DIỆN FORM CHI TIẾT CHỒNG LÊN (MODAL OVERLAY) */
+/* Modal */
 /* ======================================================== */
 .acc-modal-overlay {
   position: fixed;
@@ -133,12 +128,13 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(12px); /* Kính mờ siêu đẹp */
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 99999;
   animation: fadeIn 0.25s ease-out;
+  padding: 16px;
 }
 
 .acc-modal-card {
@@ -151,6 +147,8 @@
   position: relative;
   box-sizing: border-box;
   animation: slideUp 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -176,6 +174,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .acc-modal-close:hover {
@@ -183,7 +182,6 @@
   color: #1d1d1f;
 }
 
-/* Bố cục chia hai bên trong Modal */
 .acc-modal-content {
   display: flex;
   gap: 48px;
@@ -198,6 +196,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 
 .acc-modal-emoji {
@@ -237,14 +236,12 @@
   margin: 0 0 32px 0;
 }
 
-/* Khối nút Hành động */
 .acc-modal-actions {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Nút thêm vào giỏ hàng xanh dương chuẩn Apple */
 .acc-btn-cart {
   width: 100%;
   padding: 14px;
@@ -262,7 +259,11 @@
   background: #0066cc;
 }
 
-/* Nút yêu thích viền xám bên dưới */
+.acc-btn-cart:disabled {
+  background: #b0b0b5;
+  cursor: not-allowed;
+}
+
 .acc-btn-favorite {
   width: 100%;
   padding: 12px;
@@ -291,20 +292,178 @@
   stroke: #007aff;
 }
 
-/* ======================================================== */
-/* Responsive hỗ trợ thiết bị di động */
-/* ======================================================== */
+/* Skeleton Card */
+.skeleton-card {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.skeleton-card .skeleton {
+  border-radius: 8px;
+}
+
+.skeleton-card .acc-image-placeholder {
+  background: transparent;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.acc-card {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media screen and (max-width: 1024px) {
-  .acc-grid { grid-template-columns: repeat(2, 1fr); }
-  .acc-header h2 { font-size: 38px; }
+  .acc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .acc-header h2 {
+    font-size: 38px;
+  }
+  
+  .acc-modal-content {
+    gap: 32px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .acc-modal-content { flex-direction: column; gap: 24px; }
-  .acc-modal-left { height: 200px; width: 100%; }
+  .acc-section {
+    padding: 60px 16px;
+  }
+  
+  .acc-header {
+    margin-bottom: 32px;
+  }
+  
+  .acc-header h2 {
+    font-size: 32px;
+  }
+  
+  .acc-modal-card {
+    padding: 32px 24px;
+    margin: 10px;
+  }
+  
+  .acc-modal-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .acc-modal-left {
+    height: 200px;
+    width: 100%;
+  }
+  
+  .acc-modal-emoji {
+    font-size: 80px;
+  }
+  
+  .acc-modal-title {
+    font-size: 24px;
+  }
+  
+  .acc-modal-price {
+    font-size: 18px;
+  }
+  
+  .acc-modal-desc {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-  .acc-grid { grid-template-columns: 1fr; }
-  .acc-header h2 { font-size: 32px; }
+  .acc-section {
+    padding: 40px 12px;
+  }
+  
+  .acc-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .acc-header h2 {
+    font-size: 28px;
+  }
+  
+  .acc-card {
+    min-height: 280px;
+    padding: 18px;
+  }
+  
+  .acc-image-placeholder {
+    min-height: 120px;
+    margin: 12px 0;
+  }
+  
+  .acc-emoji {
+    font-size: 56px;
+  }
+  
+  .acc-card-info h3 {
+    font-size: 15px;
+  }
+  
+  .acc-price {
+    font-size: 13px;
+  }
+  
+  .acc-modal-card {
+    padding: 24px 16px;
+    margin: 8px;
+    border-radius: 16px;
+  }
+  
+  .acc-modal-close {
+    top: 12px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+  }
+  
+  .acc-modal-left {
+    height: 160px;
+  }
+  
+  .acc-modal-emoji {
+    font-size: 60px;
+  }
+  
+  .acc-modal-title {
+    font-size: 20px;
+  }
+  
+  .acc-modal-price {
+    font-size: 16px;
+  }
+  
+  .acc-modal-desc {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .acc-btn-cart {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .acc-btn-favorite {
+    padding: 10px;
+    font-size: 13px;
+  }
 }
