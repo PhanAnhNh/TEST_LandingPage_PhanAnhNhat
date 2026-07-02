@@ -49,6 +49,7 @@
   font-size: 28px;
   cursor: pointer;
   color: #86868b;
+  padding: 0 8px;
 }
 
 .modal-body-container {
@@ -62,6 +63,7 @@
 .items-list {
   flex: 1;
   overflow-y: auto;
+  padding-right: 4px;
 }
 
 .modal-item-card {
@@ -70,12 +72,19 @@
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid #e5e5ea;
+  gap: 12px;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .item-info h4 {
   margin: 0 0 6px 0;
   font-size: 15px;
   color: #1d1d1f;
+  word-break: break-word;
 }
 
 .item-price {
@@ -91,6 +100,7 @@
   padding: 3px 8px;
   border-radius: 4px;
   color: #86868b;
+  display: inline-block;
 }
 
 .quantity-control {
@@ -110,6 +120,9 @@
   height: 24px;
   cursor: pointer;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .remove-btn {
@@ -118,6 +131,8 @@
   color: #ff3b30;
   font-size: 13px;
   cursor: pointer;
+  padding: 4px 8px;
+  flex-shrink: 0;
 }
 
 .remove-btn:hover {
@@ -152,6 +167,7 @@
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .btn-checkout:hover {
@@ -163,4 +179,105 @@
   padding: 40px 0;
   color: #86868b;
   font-size: 14px;
+}
+
+/* ======================== */
+/* RESPONSIVE */
+/* ======================== */
+@media screen and (max-width: 768px) {
+  .side-modal-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .side-modal-header h2 {
+    font-size: 18px;
+  }
+  
+  .modal-item-card {
+    padding: 14px 0;
+  }
+  
+  .item-info h4 {
+    font-size: 14px;
+  }
+  
+  .item-price {
+    font-size: 13px;
+  }
+  
+  .total-price {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .side-modal-content {
+    padding: 16px;
+  }
+  
+  .side-modal-header {
+    padding-bottom: 12px;
+  }
+  
+  .side-modal-header h2 {
+    font-size: 16px;
+  }
+  
+  .close-btn {
+    font-size: 24px;
+  }
+  
+  .modal-item-card {
+    flex-wrap: wrap;
+    padding: 12px 0;
+    gap: 8px;
+  }
+  
+  .item-info {
+    flex: 1 1 100%;
+  }
+  
+  .item-info h4 {
+    font-size: 13px;
+  }
+  
+  .item-price {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .quantity-control {
+    gap: 8px;
+  }
+  
+  .quantity-control button {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+  
+  .remove-btn {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+  
+  .total-row {
+    font-size: 14px;
+  }
+  
+  .total-price {
+    font-size: 16px;
+  }
+  
+  .btn-checkout {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .empty-state, .modal-loading {
+    padding: 30px 0;
+    font-size: 13px;
+  }
 }

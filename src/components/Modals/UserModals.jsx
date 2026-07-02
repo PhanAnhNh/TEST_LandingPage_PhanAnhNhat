@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { cartService, favoriteService } from '../../api/cartApi';
 import './userModals.css';
+import '../../css/Skeleton.css';
+
+const CartSkeleton = () => (
+  <div className="modal-body-container">
+    <div className="items-list">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="modal-item-card">
+          <div className="item-info">
+            <div className="skeleton" style={{ width: '60%', height: '20px', marginBottom: '8px' }}></div>
+            <div className="skeleton" style={{ width: '30%', height: '18px', marginBottom: '8px' }}></div>
+            <div className="skeleton" style={{ width: '80px', height: '30px' }}></div>
+          </div>
+          <div className="skeleton" style={{ width: '40px', height: '40px', borderRadius: '50%' }}></div>
+        </div>
+      ))}
+    </div>
+    <div className="side-modal-footer">
+      <div className="skeleton" style={{ width: '100%', height: '50px' }}></div>
+    </div>
+  </div>
+);
 
 export const CartModal = ({ isOpen, onClose }) => {
   const [cartData, setCartData] = useState(null);
@@ -26,8 +47,8 @@ export const CartModal = ({ isOpen, onClose }) => {
     const newQty = currentQty + adjustment;
     try {
       await cartService.updateCartItem(productId, newQty);
-      fetchCart(); // Cập nhật lại giao diện sau khi sửa số lượng thành công
-      window.dispatchEvent(new Event('cartUpdate')); // Báo hiệu cập nhật số lượng tổng nếu cần
+      fetchCart();
+      window.dispatchEvent(new Event('cartUpdate'));
     } catch (error) {
       console.error("Lỗi cập nhật số lượng:", error);
     }
@@ -54,7 +75,7 @@ export const CartModal = ({ isOpen, onClose }) => {
         </div>
 
         {loading ? (
-          <div className="modal-loading">Đang tải giỏ hàng...</div>
+          <CartSkeleton /> // 👈 Skeleton khi loading
         ) : cartData && cartData.items.length > 0 ? (
           <div className="modal-body-container">
             <div className="items-list">
@@ -88,6 +109,24 @@ export const CartModal = ({ isOpen, onClose }) => {
     </div>
   );
 };
+
+// 👇 Skeleton cho Favorites
+const FavoritesSkeleton = () => (
+  <div className="modal-body-container">
+    <div className="items-list">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="modal-item-card">
+          <div className="item-info">
+            <div className="skeleton" style={{ width: '60%', height: '20px', marginBottom: '8px' }}></div>
+            <div className="skeleton" style={{ width: '30%', height: '18px', marginBottom: '8px' }}></div>
+            <div className="skeleton" style={{ width: '40%', height: '16px' }}></div>
+          </div>
+          <div className="skeleton" style={{ width: '60px', height: '30px', borderRadius: '8px' }}></div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 export const FavoritesModal = ({ isOpen, onClose }) => {
   const [favorites, setFavorites] = useState([]);
@@ -129,7 +168,7 @@ export const FavoritesModal = ({ isOpen, onClose }) => {
         </div>
 
         {loading ? (
-          <div className="modal-loading">Đang tải danh sách...</div>
+          <FavoritesSkeleton /> // 👈 Skeleton khi loading
         ) : favorites.length > 0 ? (
           <div className="modal-body-container">
             <div className="items-list">
