@@ -1,3 +1,4 @@
+// components/Scrollytelling/ScrollytellingSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion, useTransform, useScroll, AnimatePresence } from 'framer-motion';
@@ -13,31 +14,27 @@ const ScrollytellingSection = () => {
       title: "M2 Chip. Tốc độ vượt trội.",
       desc: "iPad Air được trang bị chip M2 với CPU 8 nhân và GPU 10 nhân, mang lại hiệu suất đột phá cho mọi tác vụ.",
       icon: "🚀",
-      bgColor: "#f5f5f7",
-      textColor: "#1d1d1f"
+      textColor: "#000000" 
     },
     {
       id: 2,
       title: "Liquid Retina Display. Sắc nét mọi góc nhìn.",
       desc: "Màn hình Liquid Retina với công nghệ P3 wide color và True Tone, cho trải nghiệm hình ảnh sống động như thật.",
       icon: "✨",
-      bgColor: "#fbfbfd",
-      textColor: "#1d1d1f"
+      textColor: "#000000"
     },
     {
       id: 3,
       title: "Apple Pencil Pro. Sáng tạo không giới hạn.",
       desc: "Cảm biến áp lực và độ nghiêng chính xác, biến iPad Air thành công cụ sáng tạo hoàn hảo.",
       icon: "✏️",
-      bgColor: "#f5f5f7",
-      textColor: "#1d1d1f"
+      textColor: "#000000"
     },
     {
       id: 4,
       title: "iPadOS. Làm nhiều hơn với iPad Air.",
       desc: "Đa nhiệm mượt mà, ứng dụng chuyên nghiệp và hệ sinh thái mạnh mẽ giúp bạn làm việc hiệu quả.",
       icon: "📱",
-      bgColor: "#1d1d1f",
       textColor: "#000000"
     }
   ];
@@ -48,7 +45,6 @@ const ScrollytellingSection = () => {
   });
 
   const parallaxY = useTransform(scrollYProgress, [0, 1], [20, -40]);
-  
   const opacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   const [ref, inView] = useInView({
@@ -117,10 +113,7 @@ const ScrollytellingSection = () => {
 
   return (
     <section className="scrollytelling-section" ref={containerRef}>
-      <div className="scrollytelling-bg" style={{ 
-        background: scenes[activeIndex]?.bgColor || '#f5f5f7',
-        transition: 'background 0.5s ease'
-      }}>
+      <div className="scrollytelling-bg">
         <motion.div 
           className="parallax-ipad"
           style={{ y: parallaxY, opacity: opacity }}
