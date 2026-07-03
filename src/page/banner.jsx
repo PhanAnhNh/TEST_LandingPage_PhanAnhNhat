@@ -10,6 +10,7 @@ const Banner = () => {
     <section className="hero-section">
       <div className="hero-container">
         <div className="banner-wrapper">
+
           {!imageLoaded && (
             <div className="banner-skeleton-overlay">
               <div className="skeleton"></div>
