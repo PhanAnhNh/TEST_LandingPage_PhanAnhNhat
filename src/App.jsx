@@ -1,8 +1,8 @@
 import { useState, useEffect, lazy, Suspense, useCallback } from 'react'
 import './App.css'
 import Header from './components/Headers/header'
+import ChatBot from './components/ChatBot/ChatBot' 
 
-// Lazy load components
 const Banner = lazy(() => import('./page/banner'))
 const Features = lazy(() => import('./page/feature'))
 const ScrollytellingSection = lazy(() => import('./components/Scrollytelling/ScrollytellingSection'))
@@ -81,7 +81,6 @@ function App() {
         <Suspense fallback={<div style={{textAlign: 'center', padding: '50px'}}>Loading...</div>}>
           <Banner />
           
-          {/* Section Divider - Có màu nền */}
           <SectionDivider 
             title="Trải nghiệm đỉnh cao"
             subtitle="Mọi chi tiết đều được tối ưu để mang lại trải nghiệm tốt nhất cho bạn"
@@ -111,6 +110,7 @@ function App() {
           onClose={handleCloseModal}
           onLoginSuccess={handleLoginSuccess}
         />
+        <ChatBot />
       </Suspense>
     </div>
   )

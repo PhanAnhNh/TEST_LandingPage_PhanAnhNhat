@@ -37,17 +37,21 @@
   transition: background 0.3s ease;
 }
 
-/* Dark mode - override nếu cần */
+/* Dark Mode */
 [data-theme="dark"] .section-divider {
-  /* Màu nền sẽ được set qua props, không bị override */
+  background-color: #1c1c1e !important;
 }
 
 [data-theme="dark"] .divider-content h2 {
-  /* Màu sẽ được set qua props */
+  color: #f5f5f7 !important;
 }
 
 [data-theme="dark"] .divider-content p {
-  /* Màu sẽ được set qua props */
+  color: #8e8e93 !important;
+}
+
+[data-theme="dark"] .divider-line {
+  background: linear-gradient(90deg, #0a84ff, #409cff) !important;
 }
 
 /* Responsive */

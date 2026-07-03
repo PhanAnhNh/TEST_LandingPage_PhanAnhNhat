@@ -1,3 +1,4 @@
+/* components/Scrollytelling/parallax.css */
 .parallax-image-wrapper {
   overflow: hidden;
   will-change: transform;
@@ -8,4 +9,9 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Dark mode */
+[data-theme="dark"] .parallax-image-wrapper {
+  filter: brightness(0.85);
 }

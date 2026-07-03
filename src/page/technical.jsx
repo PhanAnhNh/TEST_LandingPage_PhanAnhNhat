@@ -41,8 +41,6 @@ const TechSpecs = () => {
           </div>
         </div>
       </section>
-
-      {/* Stay in the loop section */}
       <section className="newsletter-section">
         <div className="newsletter-container">
           <div className="newsletter-content">

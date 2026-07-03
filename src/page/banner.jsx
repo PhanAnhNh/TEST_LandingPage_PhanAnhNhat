@@ -9,10 +9,7 @@ const Banner = () => {
   return (
     <section className="hero-section">
       <div className="hero-container">
-        
-        {/* Wrapper quản lý tỷ lệ khung hình cố định để tránh giật giật layout */}
         <div className="banner-wrapper">
-          {/* Skeleton overlay hiện khi ảnh chưa load xong */}
           {!imageLoaded && (
             <div className="banner-skeleton-overlay">
               <div className="skeleton"></div>
@@ -35,7 +32,6 @@ const Banner = () => {
           />
         </div>
         
-        {/* Nội dung chữ và nút tự động scale theo khung hình */}
         <div className="hero-content">
           <div className="button-group">
             <button className="btn btn-buy">Buy</button>
