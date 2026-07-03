@@ -1,6 +1,3 @@
-/* ======================================================== */
-/* ACCESSORIES SECTION - HIỆN ĐẠI & NỔI BẬT */
-/* ======================================================== */
 .acc-section {
   padding: 100px 24px 80px;
   background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
@@ -547,9 +544,6 @@
   stroke: #ff3b30;
 }
 
-/* ======================================================== */
-/* DARK MODE */
-/* ======================================================== */
 [data-theme="dark"] .acc-section {
   background: linear-gradient(180deg, #1c1c1e 0%, #2c2c2e 100%);
 }

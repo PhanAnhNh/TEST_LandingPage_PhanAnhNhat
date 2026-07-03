@@ -75,7 +75,7 @@ export const CartModal = ({ isOpen, onClose }) => {
         </div>
 
         {loading ? (
-          <CartSkeleton /> // 👈 Skeleton khi loading
+          <CartSkeleton /> 
         ) : cartData && cartData.items.length > 0 ? (
           <div className="modal-body-container">
             <div className="items-list">
@@ -110,7 +110,6 @@ export const CartModal = ({ isOpen, onClose }) => {
   );
 };
 
-// 👇 Skeleton cho Favorites
 const FavoritesSkeleton = () => (
   <div className="modal-body-container">
     <div className="items-list">
@@ -168,7 +167,7 @@ export const FavoritesModal = ({ isOpen, onClose }) => {
         </div>
 
         {loading ? (
-          <FavoritesSkeleton /> // 👈 Skeleton khi loading
+          <FavoritesSkeleton />
         ) : favorites.length > 0 ? (
           <div className="modal-body-container">
             <div className="items-list">

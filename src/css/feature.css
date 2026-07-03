@@ -62,9 +62,6 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* ========================================== */
-/* TẤT CẢ ICON ĐỀU ĐƯỢC BO TRÒN VỚI NỀN TÍM */
-/* ========================================== */
 .card-icon {
   width: 60px;
   height: 60px;
@@ -86,10 +83,6 @@
   transform: scale(1.1) rotate(-5deg);
   box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
 }
-
-/* ========================================== */
-/* CÁC BIẾN THỂ MÀU SẮC KHÁC NHAU CHO TỪNG ICON */
-/* ========================================== */
 
 /* Icon 1: 🔮 - Màu tím đậm */
 .feature-card:nth-child(1) .card-icon {
