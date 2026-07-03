@@ -1,4 +1,3 @@
-// components/Scrollytelling/ScrollytellingSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion, useTransform, useScroll, AnimatePresence } from 'framer-motion';

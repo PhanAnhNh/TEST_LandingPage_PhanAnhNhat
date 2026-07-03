@@ -59,11 +59,9 @@ const Header = ({
     setIsLoggedIn(false);
     setIsDropdownOpen(false);
     
-    // 👇 Dispatch event để thông báo logout
     window.dispatchEvent(new Event('storage'));
     window.dispatchEvent(new CustomEvent('authChange'));
     
-    // 👇 Gọi callback từ App nếu có
     if (onLogout) {
       onLogout();
     }

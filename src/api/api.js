@@ -19,33 +19,30 @@ axiosClient.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    console.log(`🚀 ${config.method?.toUpperCase()} ${config.url}`, config.data || '');
+    console.log(` ${config.method?.toUpperCase()} ${config.url}`, config.data || '');
     return config;
   },
   (error) => {
-    console.error('❌ Request error:', error);
+    console.error(' Request error:', error);
     return Promise.reject(error);
   }
 );
 
-// Response interceptor - Xử lý lỗi
 axiosClient.interceptors.response.use(
   (response) => {
-    console.log(`✅ ${response.config.url} - Status: ${response.status}`);
+    console.log(` ${response.config.url} - Status: ${response.status}`);
     return response;
   },
   (error) => {
-    console.error('❌ Response error:', error);
+    console.error(' Response error:', error);
     
     if (error.response) {
       // Server trả về lỗi
       console.error('Status:', error.response.status);
       console.error('Data:', error.response.data);
       
-      // Nếu 401 Unauthorized - xóa token
       if (error.response.status === 401) {
         localStorage.removeItem('access_token');
-        // Dispatch event để các component khác cập nhật
         window.dispatchEvent(new Event('authChange'));
       }
     } else if (error.request) {

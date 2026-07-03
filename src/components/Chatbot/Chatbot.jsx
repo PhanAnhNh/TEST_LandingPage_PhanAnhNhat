@@ -15,12 +15,11 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Khởi tạo chat khi component mount
   useEffect(() => {
     const initChat = async () => {
       const token = localStorage.getItem('access_token');
-      console.log('🔍 Token found:', !!token);
-      console.log('🔍 API Base URL:', import.meta.env.VITE_API_BASE_URL);
+      console.log(' Token found:', !!token);
+      console.log(' API Base URL:', import.meta.env.VITE_API_BASE_URL);
       
       if (token) {
         setIsLoggedIn(true);
@@ -36,18 +35,17 @@ const ChatBot = () => {
     initChat();
   }, []);
 
-  // Fetch user info dùng axiosClient
   const fetchUserInfo = useCallback(async () => {
     try {
-      console.log('🔍 Fetching user info...');
+      console.log(' Fetching user info...');
       const response = await axiosClient.get('/auth/me');
-      console.log('🔍 User data:', response.data);
+      console.log(' User data:', response.data);
       
       if (response.data && response.data.full_name) {
         setUserName(response.data.full_name);
       }
     } catch (error) {
-      console.error('❌ Error fetching user info:', error.message);
+      console.error(' Error fetching user info:', error.message);
       // Nếu lỗi 401, xóa token
       if (error.response?.status === 401) {
         localStorage.removeItem('access_token');
@@ -60,7 +58,7 @@ const ChatBot = () => {
   const loadChatHistory = useCallback(async () => {
     try {
       const data = await chatService.getHistory();
-      console.log('🔍 Chat history:', data);
+      console.log(' Chat history:', data);
       
       if (data && data.history && data.history.length > 0) {
         const formattedMessages = data.history.map((item, index) => ({
@@ -73,7 +71,7 @@ const ChatBot = () => {
         setMessages(formattedMessages);
       }
     } catch (error) {
-      console.error('❌ Error loading chat history:', error.message);
+      console.error('Error loading chat history:', error.message);
       if (error.response?.status === 401) {
         localStorage.removeItem('access_token');
         setIsLoggedIn(false);
@@ -151,15 +149,15 @@ const ChatBot = () => {
       setMessages(prev => [...prev, botMessage]);
       
     } catch (error) {
-      console.error('❌ Chat error:', error);
-      let errorMessage = '⚠️ Xin lỗi, tôi gặp sự cố. Vui lòng thử lại sau.';
+      console.error(' Chat error:', error);
+      let errorMessage = ' Xin lỗi, tôi gặp sự cố. Vui lòng thử lại sau.';
       
       if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
-        errorMessage = '⏱️ Kết nối bị timeout. Vui lòng thử lại.';
+        errorMessage = ' Kết nối bị timeout. Vui lòng thử lại.';
       } else if (!error.response) {
-        errorMessage = '🌐 Không thể kết nối đến server. Vui lòng kiểm tra kết nối.';
+        errorMessage = ' Không thể kết nối đến server. Vui lòng kiểm tra kết nối.';
       } else if (error.response?.status === 401) {
-        errorMessage = '🔒 Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
+        errorMessage = ' Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
         localStorage.removeItem('access_token');
         setIsLoggedIn(false);
       } else if (error.response?.data?.detail) {
@@ -212,13 +210,13 @@ const ChatBot = () => {
       setMessages([
         {
           id: Date.now(),
-          text: '🗑️ Lịch sử chat đã được xóa. Tôi sẵn sàng hỗ trợ bạn! 😊',
+          text: ' Lịch sử chat đã được xóa. Tôi sẵn sàng hỗ trợ bạn! ',
           sender: 'bot',
           timestamp: new Date(),
         },
       ]);
     } catch (error) {
-      console.error('❌ Error clearing history:', error);
+      console.error(' Error clearing history:', error);
       if (error.response?.status === 401) {
         alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!');
         localStorage.removeItem('access_token');
