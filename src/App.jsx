@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense, useCallback } from 'react'
 import './App.css'
 import Header from './components/Headers/header'
-import ChatBot from './components/ChatBot/ChatBot' 
+import ChatBot from './components/Chatbot/Chatbot.jsx' 
 
 const Banner = lazy(() => import('./page/banner'))
 const Features = lazy(() => import('./page/feature'))
