@@ -1,7 +1,6 @@
-// src/components/ChatBot/ChatBot.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import chatService from '../../api/chatApi';
-import './ChatBot.css';
+import './Chatbot.css';
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +12,6 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Kiểm tra đăng nhập và load lịch sử chat
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token) {
@@ -57,7 +55,6 @@ const ChatBot = () => {
     }
   };
 
-  // Tự động cuộn xuống
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
