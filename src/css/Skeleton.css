@@ -11,6 +11,37 @@
   border-radius: 8px;
 }
 
+/* Thêm vào file Skeleton.css hoặc banner.css */
+.banner-wrapper {
+  position: relative;
+  margin-top: -40px;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  background: #f5f5f7;
+  overflow: hidden; /* Đảm bảo không tràn layout */
+}
+
+/* Responsive cho banner */
+@media screen and (max-width: 768px) {
+  .banner-wrapper {
+    aspect-ratio: 16 / 8; /* Cao hơn một chút trên mobile */
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .banner-wrapper {
+    aspect-ratio: 16 / 9; 
+    margin-top: -20px; 
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .banner-wrapper {
+    aspect-ratio: 16 / 10;
+    margin-top: -10px;
+  }
+}
+
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
